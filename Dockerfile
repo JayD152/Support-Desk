@@ -26,9 +26,6 @@ ENV NEXT_TELEMETRY_DISABLED=1
 RUN addgroup --system --gid 1001 nodejs && \
     adduser --system --uid 1001 nextjs
 
-# Install prisma CLI for migrations at startup
-RUN npm install -g prisma @prisma/adapter-pg pg
-
 COPY --from=builder /app/public ./public
 COPY --from=builder /app/.next/standalone ./
 COPY --from=builder /app/.next/static ./.next/static
@@ -36,6 +33,11 @@ COPY --from=builder /app/prisma ./prisma
 COPY --from=builder /app/prisma.config.ts ./prisma.config.ts
 COPY --from=builder /app/src/generated ./src/generated
 COPY --from=builder /app/entrypoint.sh ./entrypoint.sh
+
+# Copy prisma CLI + dependencies from builder for db push at startup
+COPY --from=builder /app/node_modules/prisma ./node_modules/prisma
+COPY --from=builder /app/node_modules/@prisma ./node_modules/@prisma
+COPY --from=builder /app/node_modules/.package-lock.json ./node_modules/.package-lock.json
 
 RUN chmod +x entrypoint.sh
 
