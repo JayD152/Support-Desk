@@ -36,12 +36,11 @@ export default function Sidebar({ user }: SidebarProps) {
                 onClick={() => setOpen(!open)}
                 aria-label="Toggle menu"
             >
-                ☰
+                &#9776;
             </button>
 
             <aside className={`sidebar ${open ? "open" : ""}`}>
                 <div className="sidebar-brand">
-                    <div className="logo">S</div>
                     <span>SupportDesk</span>
                 </div>
 
@@ -53,7 +52,7 @@ export default function Sidebar({ user }: SidebarProps) {
                             className={`sidebar-link ${isActive("/dashboard") && !pathname.includes("/admin") && !pathname.includes("/tickets") ? "active" : ""}`}
                             onClick={() => setOpen(false)}
                         >
-                            <span className="icon">📊</span>
+                            <span className="symbol">&#9636;</span>
                             Dashboard
                         </Link>
                         <Link
@@ -61,36 +60,36 @@ export default function Sidebar({ user }: SidebarProps) {
                             className={`sidebar-link ${isActive("/dashboard/tickets/new") ? "active" : ""}`}
                             onClick={() => setOpen(false)}
                         >
-                            <span className="icon">✏️</span>
+                            <span className="symbol">+</span>
                             New Ticket
                         </Link>
                     </div>
 
                     {isTechOrAdmin && (
                         <div className="sidebar-section">
-                            <div className="sidebar-section-title">Tech</div>
+                            <div className="sidebar-section-title">Tickets</div>
                             <Link
                                 href="/dashboard?filter=my"
                                 className={`sidebar-link ${pathname === "/dashboard" && typeof window !== "undefined" && window.location.search.includes("filter=my") ? "active" : ""}`}
                                 onClick={() => setOpen(false)}
                             >
-                                <span className="icon">🎯</span>
-                                My Tickets
+                                <span className="symbol">&#8226;</span>
+                                Assigned to Me
                             </Link>
                             <Link
                                 href="/dashboard?filter=group"
                                 className={`sidebar-link`}
                                 onClick={() => setOpen(false)}
                             >
-                                <span className="icon">👥</span>
-                                Group Tickets
+                                <span className="symbol">&#8801;</span>
+                                Group Queue
                             </Link>
                             <Link
                                 href="/dashboard?filter=flagged"
                                 className={`sidebar-link`}
                                 onClick={() => setOpen(false)}
                             >
-                                <span className="icon">🚩</span>
+                                <span className="symbol">&#9873;</span>
                                 Flagged
                             </Link>
                         </div>
@@ -98,13 +97,13 @@ export default function Sidebar({ user }: SidebarProps) {
 
                     {user.role === "ADMIN" && (
                         <div className="sidebar-section">
-                            <div className="sidebar-section-title">Admin</div>
+                            <div className="sidebar-section-title">Administration</div>
                             <Link
                                 href="/dashboard/admin/users"
                                 className={`sidebar-link ${isActive("/dashboard/admin/users") ? "active" : ""}`}
                                 onClick={() => setOpen(false)}
                             >
-                                <span className="icon">👤</span>
+                                <span className="symbol">&#9775;</span>
                                 Users
                             </Link>
                             <Link
@@ -112,7 +111,7 @@ export default function Sidebar({ user }: SidebarProps) {
                                 className={`sidebar-link ${isActive("/dashboard/admin/groups") ? "active" : ""}`}
                                 onClick={() => setOpen(false)}
                             >
-                                <span className="icon">🏢</span>
+                                <span className="symbol">&#9670;</span>
                                 Groups
                             </Link>
                         </div>
@@ -130,7 +129,7 @@ export default function Sidebar({ user }: SidebarProps) {
                         onClick={handleSignOut}
                         title="Sign out"
                     >
-                        ↗
+                        &#8594;
                     </button>
                 </div>
             </aside>

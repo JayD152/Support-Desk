@@ -95,13 +95,13 @@ export default function DashboardPage() {
 
     const tabs = isTech
         ? [
-            { key: "all", label: "All Tickets", icon: "📋" },
-            { key: "my", label: "My Tickets", icon: "🎯" },
-            { key: "group", label: "Group", icon: "👥" },
-            { key: "flagged", label: "Flagged", icon: "🚩" },
-            { key: "recent", label: "Recent", icon: "🕐" },
+            { key: "all", label: "All Tickets" },
+            { key: "my", label: "Assigned" },
+            { key: "group", label: "Group" },
+            { key: "flagged", label: "Flagged" },
+            { key: "recent", label: "Recent" },
         ]
-        : [{ key: "all", label: "My Tickets", icon: "📋" }];
+        : [{ key: "all", label: "My Tickets" }];
 
     return (
         <div className="fade-in">
@@ -112,7 +112,7 @@ export default function DashboardPage() {
                 <div className="actions">
                     {isTech && (
                         <div className="search-bar">
-                            <span className="search-icon">🔍</span>
+                            <span className="search-icon">&#8981;</span>
                             <input
                                 type="text"
                                 placeholder="Search tickets…"
@@ -135,7 +135,7 @@ export default function DashboardPage() {
                             className={`tab-btn ${activeTab === tab.key ? "active" : ""}`}
                             onClick={() => setActiveTab(tab.key)}
                         >
-                            {tab.icon} {tab.label}
+                            {tab.label}
                         </button>
                     ))}
                 </div>
@@ -147,7 +147,7 @@ export default function DashboardPage() {
                 </div>
             ) : tickets.length === 0 ? (
                 <div className="empty-state">
-                    <div className="icon">📭</div>
+                    <div className="empty-icon">—</div>
                     <h3>No tickets found</h3>
                     <p>
                         {activeTab === "my"
@@ -167,19 +167,19 @@ export default function DashboardPage() {
                         >
                             <div className="ticket-info">
                                 <div className="ticket-subject">
-                                    {ticket.flagged && <span className="flag">🚩 </span>}
+                                    {ticket.flagged && <span className="flag">&#9873; </span>}
                                     {ticket.subject}
                                 </div>
                                 <div className="ticket-meta">
                                     <span>#{ticket.id.slice(-6)}</span>
                                     <span>by {ticket.createdBy.name}</span>
                                     {ticket.assignedTo && (
-                                        <span>→ {ticket.assignedTo.name}</span>
+                                        <span>&#8594; {ticket.assignedTo.name}</span>
                                     )}
-                                    {ticket.group && <span>📁 {ticket.group.name}</span>}
+                                    {ticket.group && <span>{ticket.group.name}</span>}
                                     <span>{timeAgo(ticket.updatedAt)}</span>
                                     {ticket._count.comments > 0 && (
-                                        <span>💬 {ticket._count.comments}</span>
+                                        <span>{ticket._count.comments} comments</span>
                                     )}
                                 </div>
                             </div>
