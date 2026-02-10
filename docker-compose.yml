@@ -18,9 +18,6 @@ services:
 
   app:
     image: ghcr.io/${GHCR_OWNER:-your-org}/support-desk:${TAG:-latest}
-    build:
-      context: .
-      dockerfile: Dockerfile
     restart: unless-stopped
     depends_on:
       db:
